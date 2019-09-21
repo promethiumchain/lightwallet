@@ -1,24 +1,26 @@
 <template>
   <div>
     <transition name="fade">
-     <div v-if="isOpen" class="mdl">
-        <div class="mdlheader">
-            <p>Send Promethium</p>
-            <b-row class="my-1">
-                <b-col sm="6">
-                    <label for="addr">Address to send to :</label>
-                </b-col>
-                <b-col sm="10">
-                    <b-form-input id="addr" size="sm" placeholder="Enter Address" class="sendform"></b-form-input>
-                </b-col>
-                <b-col sm="6">
-                    <label for="amount">Amount to send :</label>
-                </b-col>
-                <b-col sm="10">
-                    <b-form-input id="amount" size="sm" placeholder="Enter Amount" class="sendform"></b-form-input>
-                </b-col>
-            </b-row>
-        </div>
+     <div v-if="isOpen" class="mdlc container">
+         <div class="row">
+             <div class="col-6">
+                 <label class="label" for="addr">Address to send to :</label>
+                 <b-form-input id="addr" size="sm" placeholder="Enter Address" class="sendform"></b-form-input>
+             </div>
+             <div class="col-6">
+                <label for="range-1">Select Gas Value in Gwei</label>
+                <b-form-input id="range-1" v-model="gasValue" type="range" min="1" max="30"></b-form-input>
+                <div class="mt-2">Gwei: {{ gasValue }}</div>
+                <b-button @click="toggleModal" variant="outline-danger" class="btn-x">Cancel Send</b-button>
+                <b-button @click="sendcoins" variant="outline-success" class="btn-x">Confirm Send</b-button>
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-6 amount">
+                 <label class="label" for="amount">Amount to send :</label>
+                 <b-form-input id="amount" size="sm" placeholder="Enter Amount" class="sendform"></b-form-input>
+             </div>
+         </div>
       </div>
     </transition>
   </div>
@@ -33,6 +35,7 @@ export default {
             isOpen: false,
             amount: "",
             to: "",
+            gasValue: "",
         }
     },
     mounted() {
@@ -40,23 +43,35 @@ export default {
     },
     methods: {
         toggleModal() {
-            console.log('modal toggled')
             this.isOpen = !this.isOpen
+        },
+        sendcoins() {
+            console.log('send')
         }
     }
 }
 </script>
 
 <style>
-.mdl {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 30vh;
+
+.amount {
+    top: -50px;
 }
 
-.sendform {
-    width: 200px;
+.label {
+    float:left;
+}
+
+.btn-x {
+    margin-left: 20px;
+    margin-top: 20px;
+    height: 40px;
+    width: 150px;
+    font-size: 10px;
+}
+
+.mdl {
+    height: 40vh;
 }
 
 .fade-enter-active, .fade-leave-active {

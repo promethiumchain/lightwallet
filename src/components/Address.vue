@@ -11,20 +11,11 @@
             <b-button @click="showprivatekey" variant="outline-primary" class="btn privatekeybtn"> Get Private Key </b-button>
           </div>
       </div>
-      
-            
-     
-
-    <!-- <div ref="addr" class="addr">
-        <img src="../assets/crystal.png" class="crystal">
-        {{ wallet.pblk }}
-    </div>
-    <b-button @click="toggleModal" variant="outline-success" class="btn-g">Send</b-button>
-    <Modal v-bind:wallet="wallet"/>
-    <b-button @click="receive" variant="outline-primary" class="btn-g">Receive</b-button>
-    <b-button @click="$emit('del-address', wallet.plbk)" variant="outline-danger" class="del btn-g">Remove</b-button>
-        <div class="balance">Balance : {{ balance }} </div>
-    <b-button @click="showprivatekey" variant="outline-primary" class="btn privatekeybtn"> Get Private Key </b-button> -->
+      <div class="row">
+          <div class="col-12">
+              <Modal v-bind:wallet="wallet"/>
+          </div>
+      </div>
   </div>
 </template>
 
