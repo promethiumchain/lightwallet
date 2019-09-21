@@ -1,10 +1,10 @@
 <template>
   <div class="address">
-    
+  
   <p ref="addr" class="addr">
       <img src="../assets/crystal.png" class="crystal">
       {{ wallet.pblk }}
-  <b-button @click="send" variant="outline-success" class="btn-g">Send</b-button>
+  <b-button @click="toggleModal" variant="outline-success" class="btn-g">Send</b-button>
   
   <b-button @click="receive" variant="outline-primary" class="btn-g">Receive</b-button>
   <b-button @click="$emit('del-address', wallet.plbk)" variant="outline-danger" class="del btn-g">Remove</b-button>
@@ -21,11 +21,12 @@
 import Web3 from 'web3'
 import network from '../../config.json'
 
+
 export default {
     name: "Address",
     props: ["wallet"],
     components: {
-       
+      
     },
     data() {
         return {
@@ -39,8 +40,8 @@ export default {
         .catch(err => console.log(err))
     },
     methods: {
-        send() {
-
+        toggleModal() {
+            this.$emit('toggleModal')
         },
         receive() {
 
