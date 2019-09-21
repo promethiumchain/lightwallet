@@ -1,32 +1,43 @@
 <template>
   <div class="address">
-  
-  <p ref="addr" class="addr">
-      <img src="../assets/crystal.png" class="crystal">
-      {{ wallet.pblk }}
-  <b-button @click="toggleModal" variant="outline-success" class="btn-g">Send</b-button>
-  
-  <b-button @click="receive" variant="outline-primary" class="btn-g">Receive</b-button>
-  <b-button @click="$emit('del-address', wallet.plbk)" variant="outline-danger" class="del btn-g">Remove</b-button>
-  </p>
-  <div class="row">
-    <div class="balance">Balance : {{ balance }} </div>
-    <b-button @click="showprivatekey" variant="outline-primary" class="btn privatekeybtn"> Get Private Key </b-button>
-  
-  </div>
+      <div class="row">
+          <div class="col-12">
+              <img src="../assets/crystal.png" class="crystal"> 
+              {{ wallet.pblk}}
+              <b-button @click="toggleModal" variant="outline-success" class="btn-g">Send</b-button>
+              <b-button @click="receive" variant="outline-primary" class="btn-g">Receive</b-button>
+              <b-button @click="$emit('del-address', wallet.plbk)" variant="outline-danger" class="del btn-g">Remove</b-button>
+              <label class="balance">Balance : {{ balance }} </label>
+            <b-button @click="showprivatekey" variant="outline-primary" class="btn privatekeybtn"> Get Private Key </b-button>
+          </div>
+      </div>
+      
+            
+     
+
+    <!-- <div ref="addr" class="addr">
+        <img src="../assets/crystal.png" class="crystal">
+        {{ wallet.pblk }}
+    </div>
+    <b-button @click="toggleModal" variant="outline-success" class="btn-g">Send</b-button>
+    <Modal v-bind:wallet="wallet"/>
+    <b-button @click="receive" variant="outline-primary" class="btn-g">Receive</b-button>
+    <b-button @click="$emit('del-address', wallet.plbk)" variant="outline-danger" class="del btn-g">Remove</b-button>
+        <div class="balance">Balance : {{ balance }} </div>
+    <b-button @click="showprivatekey" variant="outline-primary" class="btn privatekeybtn"> Get Private Key </b-button> -->
   </div>
 </template>
 
 <script>
 import Web3 from 'web3'
 import network from '../../config.json'
-
+import Modal from './Modal.vue'
 
 export default {
     name: "Address",
     props: ["wallet"],
     components: {
-      
+      Modal,
     },
     data() {
         return {
@@ -59,11 +70,12 @@ export default {
 
 .crystal {
     height: auto;
-    width: 50px;
+    width: 30px;
     left: 5px;
 }
 
 .address {
+    display: block;
     background: rgb(75, 75, 75);
     color: rgb(0, 218, 247);
     padding: 2px;
@@ -72,32 +84,24 @@ export default {
 }
 
 .addr {
-    position: relative;
-    text-align: left;
-    margin-left: 50px;
-    top: 10px;
+    float: left;
 }
 
-.btn-g {
+.btn-g, .privatekeybtn {
     position: relative;
-    margin-left: 20px;
-    height: 40px;
-    width: 150px;
-    margin-top: -5px;  
+    margin-left: 30px;
+    height: 30px;
+    width: 120px;
+    font-size: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;  
 }
 
 .balance {
-    margin-left: 10%;
+    font-size: 10px;
+    margin-left: 30px;
 }
 
-.privatekeybtn {
-    position: relative;
-    height: 25px;
-    width: 300px;
-    margin-left: 35%;
-    margin-top: 10px;
-    font-size: 8px;
-    top: -5px;
-}
+
 
 </style>

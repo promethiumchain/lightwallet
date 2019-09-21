@@ -11,12 +11,13 @@ import Header from "./components/Header"
 import Wallet from "./components/Wallet"
 import AddAddress from "./components/AddAddress"
 
+
 export default {
   name: 'app',
   components: {
     Header,
     Wallet,
-    AddAddress
+    AddAddress,
   },
   data () {
     return {
