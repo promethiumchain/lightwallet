@@ -1,17 +1,35 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Header />
+  <AddAddress v-on:add-address="addAddress"/>
+  <Wallet v-bind:wallets="wallets" v-on:del-address="deleteAddress"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from "./components/Header"
+import Wallet from "./components/Wallet"
+import AddAddress from "./components/AddAddress"
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Header,
+    Wallet,
+    AddAddress
+  },
+  data () {
+    return {
+      wallets: []
+    }
+  },
+  methods: {
+    deleteAddress(pblk) {
+      this.wallets = this.wallets.filter(wallet => wallet.pblk != pblk);
+    },
+    addAddress(newAddress) {
+      this.wallets = [...this.wallets, newAddress];
+    }
   }
 }
 </script>
@@ -22,7 +40,16 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  background: rgb(75, 75, 75);
+  color: rgb(0, 218, 247);
   margin-top: 60px;
+  width: 100%;
+  height: 600px;
 }
+
+.body {
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+}
+
 </style>
