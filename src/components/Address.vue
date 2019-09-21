@@ -6,14 +6,15 @@
               {{ wallet.pblk}}
               <b-button @click="toggleModal" variant="outline-success" class="btn-g">Send</b-button>
               <b-button @click="receive" variant="outline-primary" class="btn-g">Receive</b-button>
-              <b-button @click="$emit('del-address', wallet.plbk)" variant="outline-danger" class="del btn-g">Remove</b-button>
+              <b-button @click="toggleRemoveModal" variant="outline-danger" class="del btn-g">Remove</b-button>
               <label class="balance">Balance : {{ balance }} </label>
             <b-button @click="showprivatekey" variant="outline-primary" class="btn privatekeybtn"> Get Private Key </b-button>
           </div>
       </div>
       <div class="row">
           <div class="col-12">
-              <Modal v-bind:wallet="wallet"/>
+              <SendModal v-bind:wallet="wallet"/>
+              <RemoveModal v-bind:wallet="wallet" v-on:del-address="$emit('del-address', wallet.pblk)"/>
           </div>
       </div>
   </div>
@@ -22,13 +23,15 @@
 <script>
 import Web3 from 'web3'
 import network from '../../config.json'
-import Modal from './Modal.vue'
+import SendModal from './SendModal.vue'
+import RemoveModal from './RemoveModal.vue'
 
 export default {
     name: "Address",
     props: ["wallet"],
     components: {
-      Modal,
+      SendModal,
+      RemoveModal,
     },
     data() {
         return {
@@ -44,6 +47,9 @@ export default {
     methods: {
         toggleModal() {
             this.$emit('toggleModal')
+        },
+        toggleRemoveModal() {
+            this.$emit('toggleRemove')
         },
         receive() {
 

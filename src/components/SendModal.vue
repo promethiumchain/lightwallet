@@ -28,14 +28,14 @@
 
 <script>
 export default {
-    name: "Modal",
+    name: "SendModal",
     props: ["wallet"],
     data() {
         return {
             isOpen: false,
             amount: "",
             to: "",
-            gasValue: "",
+            gasValue: "10",
         }
     },
     mounted() {
@@ -52,10 +52,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .amount {
-    top: -50px;
+    top: -70px;
 }
 
 .label {
