@@ -5,7 +5,7 @@
          <div class="row">
              <div class="col-6">
                  <label class="label" for="addr">Address to send to :</label>
-                 <b-form-input id="addr" size="sm" placeholder="Enter Address" class="sendform"></b-form-input>
+                 <b-form-input v-model="toAddr" id="addr" size="sm" placeholder="Enter Address" class="sendform"></b-form-input>
              </div>
              <div class="col-6">
                 <label for="range-1">Select Gas Value in Gwei</label>
@@ -18,7 +18,7 @@
          <div class="row">
              <div class="col-6 amount">
                  <label class="label" for="amount">Amount to send :</label>
-                 <b-form-input id="amount" size="sm" placeholder="Enter Amount" class="sendform"></b-form-input>
+                 <b-form-input v-model="amount" id="amount" size="sm" placeholder="Enter Amount" class="sendform"></b-form-input>
              </div>
          </div>
       </div>
@@ -27,15 +27,22 @@
 </template>
 
 <script>
+import Web3 from 'web3'
+import network from '../../config.json'
+import { Transaction } from 'ethereumjs-tx'
+import Common from 'ethereumjs-common'
+import { BufferToHex } from 'ethereumjs-util'
+import { PrivateToAddress } from 'ethereumjs-util'
 export default {
-    name: "SendModal",
+name: "SendModal",
     props: ["wallet"],
     data() {
         return {
             isOpen: false,
             amount: "",
-            to: "",
+            toAddr: "",
             gasValue: "10",
+            availableBalance: "",
         }
     },
     mounted() {
@@ -46,7 +53,71 @@ export default {
             this.isOpen = !this.isOpen
         },
         sendcoins() {
-            console.log('send')
+            
+            if (this.toAddr.length < 24) {
+                alert("address is not right")
+                return
+            }
+            let amountNumber = Number(this.amount)
+            let multi = 1000000000000000000
+            let finalAmount = amountNumber * multi
+            if (this.amount > this.availableBalance) {
+                alert("no enough funds available to make this transaction")
+            }
+            var w3 = new Web3(network.address)
+            var customCommon = Common.forCustomChain(
+            'mainnet',
+            {
+            // name: 'promethium',
+            // networkId: 1,
+            // chainId: 71133745320,
+            // },
+            // 'homestead',
+
+            
+            name: 'ethereum', // For development
+            networkId: 1,
+            chainId: 1,
+            },
+            'petersburg',
+            )
+            w3.eth.getTransactionCount(this.wallet.pblk).then((res) => {
+                const tx = new Transaction(
+                    {
+                    nonce: res,
+                    gasPrice: this.gasValue * 1000, // Todo check this
+                    gasLimit: 5000000,
+                    to: this.to,
+                    value: finalAmount,
+                    },
+                    { common: customCommon },
+                )
+                let npk = this.wallet.prvk
+                
+                let fpk = npk.substring(2, npk.length)
+                const privateKey = Buffer.from(
+                    fpk.toString(16),
+                    'hex',
+                )
+
+                tx.sign(privateKey)
+
+                if (tx.validate() && BufferToHex(tx.getSenderAddress()) === BufferToHex(PrivateToAddress(privateKey))) {
+                    console.log('Valid signature')
+                    } else {
+                    console.log('Invalid signature')
+                }
+
+                console.log("The transaction's chain id is", tx.getChainId())
+                const serializedTx = `0x${tx.serialize().toString('hex')}`;
+                w3.eth.sendSignedTransaction(serializedTx, function (err, transactionHash) {
+                    if (err) {
+                        console.log("error sending the tx : "+ err)
+                        return
+                    }
+                    console.log(transactionHash);
+                });
+            })
         }
     }
 }
