@@ -15,6 +15,7 @@
           <div class="col-12">
               <SendModal v-bind:wallet="wallet"/>
               <RemoveModal v-bind:wallet="wallet" v-on:del-address="$emit('del-address', wallet.pblk)"/>
+              <PrivateKeyModal v-bind:wallet="wallet" />
           </div>
       </div>
   </div>
@@ -25,6 +26,7 @@ import Web3 from 'web3'
 import network from '../../config.json'
 import SendModal from './SendModal.vue'
 import RemoveModal from './RemoveModal.vue'
+import PrivateKeyModal from './PrivateKeyModal.vue'
 
 export default {
     name: "Address",
@@ -32,6 +34,7 @@ export default {
     components: {
       SendModal,
       RemoveModal,
+      PrivateKeyModal,
     },
     data() {
         return {
@@ -55,8 +58,7 @@ export default {
 
         },
         showprivatekey() {
-            alert("This is the private key for the account.Make sure you keep this info safe!    " +
-             " address : " + this.wallet.pblk + " private key : " + this.wallet.prvk)
+            this.$emit('togglePrivate')
         }
     }
 }
