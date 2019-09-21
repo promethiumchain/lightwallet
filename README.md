@@ -1,5 +1,5 @@
 # lightwallet
-
+Light Wallet for Promethium Chain by Promethium Team 2019 version 0.0.1
 ## Project setup
 ```
 yarn install
