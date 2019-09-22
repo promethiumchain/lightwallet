@@ -10,6 +10,7 @@
 import Header from "./components/Header"
 import Wallet from "./components/Wallet"
 import AddAddress from "./components/AddAddress"
+// Todo Add Secure LS
 
 
 export default {

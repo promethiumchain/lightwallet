@@ -20,9 +20,16 @@ export default {
         }
     },
     created() {
-        var w3 = new Web3(network.address)
-        w3.eth.getBlockNumber()
-        .then(res => this.blockNumber = res)
+        var w3 = new Web3(network.ws)
+        var sub = w3.eth.subscribe('newBlockHeaders', (err, res) => {
+                if(err) {
+                    console.log(err)
+                    return
+                }
+            })
+            .on('data', (res) => {
+                this.blockNumber = res.number
+            })
         this.nodeAddr = network.address
     }
 }
