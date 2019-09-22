@@ -8,7 +8,7 @@
               <b-button @click="receive" variant="outline-primary" class="btn-g">Receive</b-button>
               <b-button @click="toggleRemoveModal" variant="outline-danger" class="del btn-g">Remove</b-button>
               <label class="balance">Balance : {{ balance }} </label>
-            <b-button @click="showprivatekey" variant="outline-primary" class="btn privatekeybtn"> Get Private Key </b-button>
+            <b-button @click="showPrivateKey" variant="outline-primary" class="btn privatekeybtn"> Get Private Key </b-button>
           </div>
       </div>
       <div class="row">
@@ -38,14 +38,29 @@ export default {
     },
     data() {
         return {
-            balance: ""
+            balance: "",
+            blockHeader: ""
         }
     },
     created() {
-        var w3 = new Web3(network.address)
-        w3.eth.getBalance(this.wallet.pblk)
-        .then(res => this.balance = res)
-        .catch(err => console.log(err))
+        // var w3 = new Web3(network.address)
+        // w3.eth.getBalance(this.wallet.pblk)
+        // .then(res => this.balance = res)
+        // .catch(err => console.log(err))
+        const w3 = new Web3(network.ws)
+            const addr = this.wallet.pblk
+            const div = 1000000000000000000
+            var sub = w3.eth.subscribe('newBlockHeaders', (err, res) => {
+                if(err) {
+                    console.log(err)
+                    return
+                }
+            })
+            .on('data', (res) => {
+                w3.eth.getBalance(addr)
+                .then(res => this.balance = res / div)
+            })
+            
     },
     methods: {
         toggleModal() {
@@ -57,7 +72,7 @@ export default {
         receive() {
 
         },
-        showprivatekey() {
+        showPrivateKey() {
             this.$emit('togglePrivate')
         }
     }
