@@ -15,7 +15,7 @@ export default {
     name: "Header",
     data() {
         return {
-            blockNumber: "",
+            blockNumber: "Waiting for sync...",
             nodeAddr: ""
         }
     },

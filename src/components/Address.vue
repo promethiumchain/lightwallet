@@ -38,15 +38,11 @@ export default {
     },
     data() {
         return {
-            balance: "",
+            balance: "?",
             blockHeader: ""
         }
     },
     created() {
-        // var w3 = new Web3(network.address)
-        // w3.eth.getBalance(this.wallet.pblk)
-        // .then(res => this.balance = res)
-        // .catch(err => console.log(err))
         const w3 = new Web3(network.ws)
             const addr = this.wallet.pblk
             const div = 1000000000000000000
@@ -58,7 +54,10 @@ export default {
             })
             .on('data', (res) => {
                 w3.eth.getBalance(addr)
-                .then(res => this.balance = res / div)
+                .then((res) => {
+                    this.balance = res / div
+                })
+                .catch(err => console.log(err))
             })
             
     },

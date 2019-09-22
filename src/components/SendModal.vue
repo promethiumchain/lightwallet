@@ -8,9 +8,6 @@
                  <b-form-input v-model="toAddr" id="addr" size="sm" placeholder="Enter Address" class="sendform"></b-form-input>
              </div>
              <div class="col-6">
-                <label for="range-1">Select Gas Value in Gwei</label>
-                <b-form-input id="range-1" v-model="gasValue" type="range" min="1" max="30"></b-form-input>
-                <div class="mt-2">Gwei: {{ gasValue }}</div>
                 <b-button @click="toggleModal" variant="outline-danger" class="btn-x">Cancel Send</b-button>
                 <b-button @click="sendcoins" variant="outline-success" class="btn-x">Confirm Send</b-button>
              </div>
@@ -30,7 +27,7 @@
 import Web3 from 'web3'
 import network from '../../config.json'
 import { Transaction } from 'ethereumjs-tx'
-import Common from 'ethereumjs-common'
+import  Common  from 'ethereumjs-common'
 import { BufferToHex } from 'ethereumjs-util'
 import { PrivateToAddress } from 'ethereumjs-util'
 export default {
@@ -41,8 +38,8 @@ name: "SendModal",
             isOpen: false,
             amount: "",
             toAddr: "",
-            gasValue: "10",
             availableBalance: "",
+            gasPrice: "",
         }
     },
     mounted() {
@@ -61,34 +58,34 @@ name: "SendModal",
             let amountNumber = Number(this.amount)
             let multi = 1000000000000000000
             let finalAmount = amountNumber * multi
-            if (this.amount > this.availableBalance) {
-                alert("no enough funds available to make this transaction")
-            }
+            // if (this.amount > this.availableBalance) { // TODO store current and check against it
+            //     alert("no enough funds available to make this transaction")
+            // }
             var w3 = new Web3(network.address)
             var customCommon = Common.forCustomChain(
             'mainnet',
             {
-            // name: 'promethium',
-            // networkId: 1,
-            // chainId: 71133745320,
-            // },
-            // 'homestead',
-
-            
-            name: 'ethereum', // For development
+            name: 'promethium',
             networkId: 1,
-            chainId: 1,
+            chainId: 71133745320,
             },
-            'petersburg',
+            'homestead',
+            // name: 'ethereum', // For development
+            // networkId: 1,
+            // chainId: 1,
+            // },
+            // 'petersburg',
             )
+
             w3.eth.getTransactionCount(this.wallet.pblk).then((res) => {
                 const tx = new Transaction(
                     {
+                    from: this.wallet.pblk,
                     nonce: res,
-                    gasPrice: this.gasValue * 1000, // Todo check this
-                    gasLimit: 5000000,
-                    to: this.to,
-                    value: finalAmount,
+                    gasPrice: w3.utils.toHex(100e9), // Todo check this
+                    gasLimit: w3.utils.toHex(50000),
+                    to: this.toAddr,
+                    value: w3.utils.toHex(finalAmount),
                     },
                     { common: customCommon },
                 )
@@ -101,14 +98,12 @@ name: "SendModal",
                 )
 
                 tx.sign(privateKey)
-
-                if (tx.validate() && BufferToHex(tx.getSenderAddress()) === BufferToHex(PrivateToAddress(privateKey))) {
-                    console.log('Valid signature')
-                    } else {
-                    console.log('Invalid signature')
+                if(tx.validate()){
+                    console.log('valid')
+                } else {
+                    console.log('invalid')
                 }
 
-                console.log("The transaction's chain id is", tx.getChainId())
                 const serializedTx = `0x${tx.serialize().toString('hex')}`;
                 w3.eth.sendSignedTransaction(serializedTx, function (err, transactionHash) {
                     if (err) {
@@ -116,8 +111,9 @@ name: "SendModal",
                         return
                     }
                     console.log(transactionHash);
-                });
+                })
             })
+            .catch(err => console.log(err))
         }
     }
 }
@@ -126,7 +122,9 @@ name: "SendModal",
 <style scoped>
 
 .amount {
-    top: -70px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    top: 0px;
 }
 
 .label {
