@@ -82,7 +82,7 @@ name: "SendModal",
                     {
                     from: this.wallet.pblk,
                     nonce: res,
-                    gasPrice: w3.utils.toHex(100e9), // Todo check this
+                    gasPrice: w3.utils.toHex(21e9), // Todo check this
                     gasLimit: w3.utils.toHex(50000),
                     to: this.toAddr,
                     value: w3.utils.toHex(finalAmount),
