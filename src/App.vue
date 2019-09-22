@@ -31,6 +31,19 @@ export default {
     addAddress(newAddress) {
       this.wallets = [...this.wallets, newAddress];
     }
+  },
+  watch: {
+    wallets: {
+      handler() {
+        console.log('wallets have changed')
+        localStorage.setItem('wallets', JSON.stringify(this.wallets))
+      },
+      deep: true,
+    },
+  },
+  mounted() {
+    console.log('app mounted')
+    if(localStorage.getItem('wallets')) this.wallets = JSON.parse(localStorage.getItem('wallets'))
   }
 }
 </script>
