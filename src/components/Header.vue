@@ -30,7 +30,7 @@ export default {
             .on('data', (res) => {
                 this.blockNumber = res.number
             })
-            .catch(err => alert(err))
+            
         this.nodeAddr = network.address
     }
 }
