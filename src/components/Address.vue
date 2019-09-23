@@ -2,13 +2,12 @@
   <div class="address">
       <div class="row">
           <div class="col-12 addressdiv">
-              <img src="../assets/crystal.png" class="crystal"> 
-              {{ wallet.pblk}}
+              <label class="labeladdr">{{ wallet.pblk}}</label>
               <b-button @click="toggleModal" variant="outline-success" class="btn-g">Send</b-button>
               <b-button @click="receive" variant="outline-primary" class="btn-g">Receive</b-button>
               <b-button @click="toggleRemoveModal" variant="outline-danger" class="del btn-g">Remove</b-button>
               <label class="balance">Balance : {{ balance }} </label>
-            <b-button @click="showPrivateKey" variant="outline-primary" class="btn privatekeybtn"> Get Private Key </b-button>
+              <b-button @click="showPrivateKey" variant="outline-primary" class="btn privatekeybtn"> Get Private Key </b-button>
           </div>
       </div>
       <div class="row">
@@ -79,12 +78,13 @@ export default {
 </script>
 
 <style scoped>
- 
 
-.crystal {
-    height: auto;
-    width: 30px;
-    left: 5px;
+.labeladdr {
+    position: relative;
+    float: left;
+    margin-top: 17px;
+    right: -30px;
+    width: 300px;
 }
 
 .address {
@@ -106,7 +106,7 @@ export default {
 
 .btn-g, .privatekeybtn {
     position: relative;
-    margin-left: 30px;
+    margin-left: 20px;
     height: 30px;
     width: 120px;
     font-size: 10px;
@@ -115,8 +115,8 @@ export default {
 }
 
 .balance {
-    font-size: 10px;
-    margin-left: 30px;
+    position: relative;
+    width: 200px;
 }
 
 

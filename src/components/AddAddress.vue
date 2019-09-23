@@ -2,12 +2,12 @@
   <div class="add">
    <b-button @click="addAddress" variant="outline-danger" class="btn">Create New Address</b-button>
    <b-button @click="importAddress" variant="outline-success" class="btn" >Import Address</b-button>
-   <PasswordModal @newkey="addKeyAddr"/>
+   <ImportModal @newkey="addKeyAddr"/>
   </div>
 </template>
 
 <script>
-import PasswordModal from './PasswordModal'
+import ImportModal from './ImportModal'
 import uuid from 'uuid'
 import Web3 from 'web3'
 import network from '../../config.json'
@@ -16,7 +16,7 @@ import network from '../../config.json'
 export default {
     name: "AddAddress",
     components: {
-        PasswordModal
+        ImportModal
     },
     methods: {
         addAddress(e) {

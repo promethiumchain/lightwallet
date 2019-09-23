@@ -4,10 +4,17 @@
         <div v-if="isOpen" class="container">
             <div class="row">
                 <div class="col-12 passdiv">
-                    <label class="label" for="pass">Password for the key :</label>
+                    <label class="passlabel">Password for the key :</label>
                     <b-form-input v-model="password" id="pass" size="sm" placeholder="Enter Password" class="password"></b-form-input>
-                    <b-button @click="toggleModal" variant="outline-danger" class="btn-x">Cancel</b-button>
-                    <b-button @click="setPassword" variant="outline-success" class="btn-x">Load File</b-button>
+                    <b-button @click="setPassword" variant="outline-success" class="load">Load File</b-button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 prkey">
+                    <label class="pklabel">Private Key :</label>
+                    <b-form-input v-model="privatekey" id="pk" size="sm" placeholder="Enter Private Key" class="pk"></b-form-input>
+                    <b-button @click="toggleModal" variant="outline-danger" class="cancel">Cancel</b-button>
+                    <b-button @click="importFromPrivateKey" variant="outline-success" class="import">Import Address</b-button>
                 </div>
             </div>
         </div>
@@ -19,13 +26,16 @@
 import uuid from 'uuid'
 import ethWallet from 'ethereumjs-wallet'
 import fs from 'fs'
+import Web3 from 'web3'
+import network from '../../config.json'
 export default {
-    name: "PasswordModal",
+    name: "ImportModal",
     
     data() {
         return {
             isOpen: false,
             password: "",
+            privatekey: "",
             filePath: "",
         }
     },
@@ -63,28 +73,84 @@ export default {
             }
             input.type = 'file';
             input.click()
+        },
+        importFromPrivateKey() {
+            var w3 = new Web3(network.address)
+            let ac = w3.eth.accounts.privateKeyToAccount(this.privatekey)
+            const newAddress = {
+                id: uuid.v4(),
+                pblk: ac["address"],
+                prvk: ac["privateKey"],
+            }
+            this.$emit('newkey', newAddress)
+            this.isOpen = false
         }
     }
 }
 </script>
 
 <style scoped>
-.btn-x {
-    margin-left: 20px;
-    
-    height: 30px;
-    width: 150px;
-    font-size: 10px;
+
+.passlabel {
+    position: absolute;
+    top: 0px;
+    left: 30px;
+    width: 200px;
+}
+
+.pklabel {
+    position: absolute;
+    top: 50px;
+    left: 0px;
+    width: 200px;
 }
 
 .password {
-     margin-left: 20px;
+    position: absolute;
+    top: 0px;
+    left : 240px;
+    margin-left: 20px;
     width: 300px;
 }
 
-.passdiv {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.load {
+    position: absolute;
+    top: 0px;
+    left : 900px;
+    height: 30px;
+    width: 150px;
+    font-size: 10px;    
 }
+
+.cancel {
+    position: absolute;
+    top: 100px;
+    left : 900px;
+    height: 30px;
+    width: 150px;
+    font-size: 10px;    
+}
+
+.import {
+    position: absolute;
+    top: 50px;
+    left : 900px;
+    height: 30px;
+    width: 150px;
+    font-size: 10px; 
+}
+
+.pk {
+    position: absolute;
+    top: 50px;
+    left: 260px;
+    width: 600px;
+}
+
+.container {
+    margin-top: 10px;
+    display: block;
+    height: 130px;
+}
+
 </style>
