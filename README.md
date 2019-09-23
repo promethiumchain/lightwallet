@@ -1,5 +1,12 @@
 # lightwallet
 Light Wallet for Promethium Chain by Promethium Team 2019 version 0.0.1
+
+To install you will need :
+git
+npm or yarn
+build-tools(for windows) => npm install --global windows-build-tools
+
+
 ## Project setup
 ```
 yarn install
