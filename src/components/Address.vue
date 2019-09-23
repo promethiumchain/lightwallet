@@ -1,7 +1,7 @@
 <template>
   <div class="address">
       <div class="row">
-          <div class="col-12">
+          <div class="col-12 addressdiv">
               <img src="../assets/crystal.png" class="crystal"> 
               {{ wallet.pblk}}
               <b-button @click="toggleModal" variant="outline-success" class="btn-g">Send</b-button>
@@ -98,6 +98,10 @@ export default {
 
 .addr {
     float: left;
+}
+
+.addressdiv {
+    font-size: 12px;
 }
 
 .btn-g, .privatekeybtn {

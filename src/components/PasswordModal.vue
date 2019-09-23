@@ -45,17 +45,20 @@ export default {
                 var reader = new FileReader();
                 reader.readAsText(this.file,'UTF-8');
                 reader.onload = readerEvent => {
-                const w = ethWallet.fromV3(fs.readFileSync(this.file.path).toString(), this.password, true)
-                newAddress = {
-                id: uuid.v4(),
-                pblk: "0x"+w.getAddress().toString('hex'),
-                prvk: "0x"+w.getPrivateKey().toString('hex'),
-                }
-                //TODO reset the placeholder
-                              
-                this.$emit('newkey', newAddress)
-                this.isOpen = false
-                
+                    try {
+                        const w = ethWallet.fromV3(fs.readFileSync(this.file.path).toString(), this.password, true)
+                        newAddress = {
+                        id: uuid.v4(),
+                        pblk: "0x"+w.getAddress().toString('hex'),
+                        prvk: "0x"+w.getPrivateKey().toString('hex'),
+                        }
+                        //TODO reset the placeholder
+                        this.$emit('newkey', newAddress)
+                        this.isOpen = false
+                    }
+                    catch(err) {
+                        alert('wrong password')
+                    }    
                 }
             }
             input.type = 'file';
@@ -68,13 +71,19 @@ export default {
 <style scoped>
 .btn-x {
     margin-left: 20px;
-    margin-top: 20px;
+    
     height: 30px;
     width: 150px;
     font-size: 10px;
 }
 
+.password {
+     margin-left: 20px;
+    width: 300px;
+}
+
 .passdiv {
+    display: flex;
     justify-content: center;
     align-items: center;
 }
