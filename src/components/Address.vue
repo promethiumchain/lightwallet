@@ -46,18 +46,18 @@ export default {
         const w3 = new Web3(network.ws)
             const addr = this.wallet.pblk
             const div = 1000000000000000000
-            var sub = w3.eth.subscribe('newBlockHeaders', (err, res) => {
+            w3.eth.subscribe('newBlockHeaders', (err, res) => {
                 if(err) {
-                    console.log(err)
+                    alert("trying to subscibe to new evets failed with error : "+err)
                     return
                 }
             })
-            .on('data', (res) => {
+            .on('data', () => {
                 w3.eth.getBalance(addr)
                 .then((res) => {
                     this.balance = res / div
                 })
-                .catch(err => console.log(err))
+                .catch(err => alert(err))
             })
             
     },

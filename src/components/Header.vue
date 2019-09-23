@@ -21,15 +21,16 @@ export default {
     },
     created() {
         var w3 = new Web3(network.ws)
-        var sub = w3.eth.subscribe('newBlockHeaders', (err, res) => {
+        w3.eth.subscribe('newBlockHeaders', (err) => {
                 if(err) {
-                    console.log(err)
+                    alert("trying to subscibe to new evets failed with error : "+err)
                     return
                 }
             })
             .on('data', (res) => {
                 this.blockNumber = res.number
             })
+            .catch(err => alert(err))
         this.nodeAddr = network.address
     }
 }

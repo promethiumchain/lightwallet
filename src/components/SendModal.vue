@@ -28,8 +28,6 @@ import Web3 from 'web3'
 import network from '../../config.json'
 import { Transaction } from 'ethereumjs-tx'
 import  Common  from 'ethereumjs-common'
-import { BufferToHex } from 'ethereumjs-util'
-import { PrivateToAddress } from 'ethereumjs-util'
 export default {
 name: "SendModal",
     props: ["wallet"],
@@ -98,19 +96,17 @@ name: "SendModal",
                 )
 
                 tx.sign(privateKey)
-                if(tx.validate()){
-                    console.log('valid')
-                } else {
-                    console.log('invalid')
-                }
+                if(!tx.validate()){
+                    return
+                } 
 
                 const serializedTx = `0x${tx.serialize().toString('hex')}`;
                 w3.eth.sendSignedTransaction(serializedTx, function (err, transactionHash) {
                     if (err) {
-                        console.log("error sending the tx : "+ err)
+                        alert("error sending the tx : "+ err)
                         return
                     }
-                    console.log(transactionHash);
+                    alert("Transaction send with hash: "+transactionHash);
                 })
             })
             .catch(err => console.log(err))

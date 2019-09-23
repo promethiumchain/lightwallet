@@ -9,7 +9,6 @@
 import uuid from 'uuid';
 import Web3 from 'web3';
 import network from '../../config.json'
-import { readFile } from 'fs';
 export default {
     name: "AddAddress",
     data() {
@@ -21,7 +20,6 @@ export default {
         addAddress(e) {
             var w3 = new Web3(network.address)
             var ac = w3.eth.accounts.create()
-            console.log(ac)
             e.preventDefault();
             const newAddress = {
                 id: uuid.v4(),
