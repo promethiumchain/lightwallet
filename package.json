@@ -1,6 +1,8 @@
 {
   "name": "lightwallet",
   "version": "0.1.0",
+  "description": "lightwallet for Promethium",
+  "author": {"name": "ThePromethium Team "},
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
