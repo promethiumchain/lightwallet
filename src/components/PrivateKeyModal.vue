@@ -37,6 +37,7 @@ export default {
             document.execCommand('copy')
             document.body.removeChild(dummy)
             alert('private key copied to clipboard') // TODO make a modal
+            this.isOpen = false
         }
     }
 }

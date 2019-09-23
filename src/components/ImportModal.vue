@@ -4,7 +4,7 @@
         <div v-if="isOpen" class="container">
             <div class="row">
                 <div class="col-12 passdiv">
-                    <label class="passlabel">Password for the key :</label>
+                    <label class="passlabel">Password for the key file :</label>
                     <b-form-input v-model="password" id="pass" size="sm" placeholder="Enter Password" class="password"></b-form-input>
                     <b-button @click="setPassword" variant="outline-success" class="load">Load File</b-button>
                 </div>
@@ -93,15 +93,15 @@ export default {
 
 .passlabel {
     position: absolute;
-    top: 0px;
+    top: 10px;
     left: 30px;
     width: 200px;
 }
 
 .pklabel {
     position: absolute;
-    top: 50px;
-    left: 0px;
+    top: 60px;
+    left: -15px;
     width: 200px;
 }
 
