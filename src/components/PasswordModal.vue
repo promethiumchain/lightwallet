@@ -48,12 +48,14 @@ export default {
                 const w = ethWallet.fromV3(fs.readFileSync(this.file.path).toString(), this.password, true)
                 newAddress = {
                 id: uuid.v4(),
-                pblk: w.getAddress().toString('hex'),
-                prvk: w.getPrivateKey().toString('hex'),
+                pblk: "0x"+w.getAddress().toString('hex'),
+                prvk: "0x"+w.getPrivateKey().toString('hex'),
                 }
+                //TODO reset the placeholder
+                              
                 this.$emit('newkey', newAddress)
                 this.isOpen = false
-                document.getElementById('pass').value = "Enter Password"
+                
                 }
             }
             input.type = 'file';
