@@ -4,20 +4,22 @@
      <div v-if="isOpen" class="mdlc container">
          <div class="row">
              <div class="col-6">
-                 <label class="label" for="addr">Address to send to :</label>
-                 <b-form-input v-model="toAddr" id="addr" size="sm" placeholder="Enter Address" class="sendform"></b-form-input>
+                 <label class="addrlabel" for="addr">Address to send to :</label>
+                 <b-form-input v-model="toAddr" id="addr" size="sm" placeholder="Enter Address" class="sendform1"></b-form-input>
              </div>
              <div class="col-6">
-                <b-button @click="toggleModal" variant="outline-danger" class="btn-x">Cancel Send</b-button>
-                <b-button @click="sendcoins" variant="outline-success" class="btn-x">Confirm Send</b-button>
+                <b-button @click="toggleModal" variant="outline-danger" class="cancelbtn">Cancel Send</b-button>
+                <b-button @click="sendcoins" variant="outline-success" class="sendbtn">Confirm Send</b-button>
              </div>
-         </div>
-         <div class="row">
              <div class="col-6 amount">
-                 <label class="label" for="amount">Amount to send :</label>
-                 <b-form-input v-model="amount" id="amount" size="sm" placeholder="Enter Amount" class="sendform"></b-form-input>
-             </div>
+                <label class="amountlabel" for="amount">Amount to send :</label>
+                <b-form-input v-model="amount" id="amount" size="sm" placeholder="Enter Amount" class="sendform2"></b-form-input>
+            </div>
          </div>
+        
+        
+         
+         <div class="dummy"></div>
       </div>
     </transition>
   </div>
@@ -68,11 +70,6 @@ name: "SendModal",
             chainId: 71133745320,
             },
             'homestead',
-            // name: 'ethereum', // For development
-            // networkId: 1,
-            // chainId: 1,
-            // },
-            // 'petersburg',
             )
 
             w3.eth.getTransactionCount(this.wallet.pblk).then((res) => {
@@ -118,28 +115,62 @@ name: "SendModal",
 
 <style scoped>
 
-.amount {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    top: 0px;
-}
-
-.label {
-    float:left;
-}
-
-.btn-x {
-    margin-left: 20px;
-    margin-top: 20px;
-    height: 40px;
-    width: 150px;
+.addrlabel {
+    position: absolute;
+    top: 10px;
+    left: 10px;
     font-size: 10px;
 }
 
-.mdl {
-    height: 40vh;
+.sendform1 {
+    position: absolute;
+    top: 0px;
+    left: 110px;
+    width: 250px;
+    height: 30px;
+    font-size: 10px;
+    z-index: 9999;
 }
 
+.sendform2 {
+   position: absolute;
+    top: 0px;
+    left: 490px;
+    width: 200px;
+    height: 30px;
+    font-size: 10px;
+    z-index: 9999;
+}
+
+
+.amountlabel {
+    position: absolute;
+    top: 10px;
+    left: 400px;
+    font-size: 10px;
+}
+
+.sendbtn {
+    position: absolute;
+    top: 0px;
+    left: 275px;
+    font-size: 10px;
+    height: 30px;
+    width: 100px;   
+}
+
+.cancelbtn {
+    position: absolute;
+    top: 0px;
+    left: 150px;
+    font-size: 10px;
+    height: 30px;
+    width: 100px;   
+}
+.dummy {
+    position: relative;
+    height: 50px;
+}
 .fade-enter-active, .fade-leave-active {
   transition: opacity 1s;
 }
