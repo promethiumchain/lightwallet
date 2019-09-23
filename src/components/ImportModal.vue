@@ -83,6 +83,7 @@ export default {
                 prvk: ac["privateKey"],
             }
             this.$emit('newkey', newAddress)
+            alert('impoted successfuly a wallet with address : ' + newAddress.pblk)
             this.isOpen = false
         }
     }
