@@ -2,7 +2,9 @@
   "name": "lightwallet",
   "version": "0.1.0",
   "description": "lightwallet for Promethium",
-  "author": {"name": "ThePromethium Team "},
+  "author": {
+    "name": "ThePromethium Team "
+  },
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -22,6 +24,7 @@
     "ethereumjs-common": "^1.3.2",
     "ethereumjs-tx": "^2.1.1",
     "ethereumjs-util": "^6.1.0",
+    "ethereumjs-wallet": "^0.6.3",
     "jquery": "^3.4.1",
     "popper.js": "^1.14.7",
     "secure-ls": "^1.2.5",

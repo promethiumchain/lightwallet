@@ -29,8 +29,19 @@ export default {
     deleteAddress(pblk) {
       this.wallets = this.wallets.filter(wallet => wallet.pblk != pblk);
     },
-    addAddress(newAddress) {
-      this.wallets = [...this.wallets, newAddress];
+    addAddress(newAddress) { 
+      let add = false
+      this.wallets.forEach(element => {
+          if(element.pblk == newAddress.pblk) {
+            alert('address already in the wallets...aborting')
+            add = false
+          } else {
+            add = true
+          }
+      });
+      if(add) {
+        this.wallets = [...this.wallets, newAddress];
+      }
     }
   },
   watch: {

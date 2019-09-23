@@ -1,20 +1,22 @@
 <template>
   <div class="add">
    <b-button @click="addAddress" variant="outline-danger" class="btn">Create New Address</b-button>
-   <b-button @click="importAddress" type="file" variant="outline-success" class="btn">Import Address</b-button>
+   <b-button @click="importAddress" variant="outline-success" class="btn" >Import Address</b-button>
+   <PasswordModal @newkey="addKeyAddr"/>
   </div>
 </template>
 
 <script>
-import uuid from 'uuid';
-import Web3 from 'web3';
+import PasswordModal from './PasswordModal'
+import uuid from 'uuid'
+import Web3 from 'web3'
 import network from '../../config.json'
+
+
 export default {
     name: "AddAddress",
-    data() {
-        return {
-            file: ""
-        }
+    components: {
+        PasswordModal
     },
     methods: {
         addAddress(e) {
@@ -29,14 +31,10 @@ export default {
             this.$emit('add-address', newAddress)
         },
         importAddress() { 
-            var input = document.createElement('input');
-            input.onchange = e => { 
-                var iFile = e.target.files[0]; 
-                this.file = iFile
-            }
-            input.type = 'file';
-            input.click()
-
+            this.$emit('togglePassword')
+        },
+        addKeyAddr(newAddress) {
+            this.$emit('add-address', newAddress)
         }
     }
 }
