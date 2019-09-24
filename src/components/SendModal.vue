@@ -157,6 +157,7 @@ name: "SendModal",
     font-size: 10px;
     height: 30px;
     width: 100px;   
+    z-index: 9999;
 }
 
 .cancelbtn {
@@ -166,6 +167,7 @@ name: "SendModal",
     font-size: 10px;
     height: 30px;
     width: 100px;   
+    z-index: 9999;
 }
 .dummy {
     position: relative;
