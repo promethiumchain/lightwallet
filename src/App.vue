@@ -30,7 +30,7 @@ export default {
       this.wallets = this.wallets.filter(wallet => wallet.pblk != pblk);
     },
     addAddress(newAddress) { 
-      if(this.wallets.lenght == 0) {
+      if(this.wallets.length == 0) {
         this.wallets = [...this.wallets, newAddress];
         return
       }
