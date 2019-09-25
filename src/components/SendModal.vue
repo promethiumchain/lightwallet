@@ -85,7 +85,7 @@ name: "SendModal",
                 let npk = this.wallet.prvk
                 
                 let fpk = npk.substring(2, npk.length)
-                const privateKey = Buffer.alloc(
+                const privateKey = Buffer.from(
                     fpk.toString(16),
                     'hex',
                 )
