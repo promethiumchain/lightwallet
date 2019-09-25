@@ -16,9 +16,6 @@
                 <b-form-input v-model="amount" id="amount" size="sm" placeholder="Enter Amount" class="sendform2"></b-form-input>
             </div>
          </div>
-        
-        
-         
          <div class="dummy"></div>
       </div>
     </transition>
@@ -58,7 +55,6 @@ name: "SendModal",
             let amountNumber = Number(this.amount)
             let multi = 1000000000000000000
             let finalAmount = amountNumber * multi
-            console.log(this.balance)
             if (this.amount > this.balance || this.balance == 0) { // TODO store current and check against it
                 alert("no enough funds available to make this transaction")
                 return
