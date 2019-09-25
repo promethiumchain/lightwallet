@@ -30,6 +30,10 @@ export default {
       this.wallets = this.wallets.filter(wallet => wallet.pblk != pblk);
     },
     addAddress(newAddress) { 
+      if(this.wallets.lenght == 0) {
+        this.wallets = [...this.wallets, newAddress];
+        return
+      }
       let add = false
       this.wallets.forEach(element => {
           if(element.pblk == newAddress.pblk) {
