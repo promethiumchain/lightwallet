@@ -32,7 +32,7 @@ import { Transaction } from 'ethereumjs-tx'
 import  Common  from 'ethereumjs-common'
 export default {
 name: "SendModal",
-    props: ["wallet"],
+    props: ["wallet", "balance"],
     data() {
         return {
             isOpen: false,
@@ -58,9 +58,11 @@ name: "SendModal",
             let amountNumber = Number(this.amount)
             let multi = 1000000000000000000
             let finalAmount = amountNumber * multi
-            // if (this.amount > this.availableBalance) { // TODO store current and check against it
-            //     alert("no enough funds available to make this transaction")
-            // }
+            console.log(this.balance)
+            if (this.amount > this.balance || this.balance == 0) { // TODO store current and check against it
+                alert("no enough funds available to make this transaction")
+                return
+            }
             var w3 = new Web3(network.address)
             var customCommon = Common.forCustomChain(
             'mainnet',

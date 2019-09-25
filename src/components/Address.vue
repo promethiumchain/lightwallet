@@ -12,7 +12,7 @@
       </div>
       <div class="row">
           <div class="col-12">
-              <SendModal v-bind:wallet="wallet"/>
+              <SendModal v-bind:wallet="wallet" v-bind:balance="balance"/>
               <RemoveModal v-bind:wallet="wallet" v-on:del-address="$emit('del-address', wallet.pblk)"/>
               <PrivateKeyModal v-bind:wallet="wallet" />
           </div>
