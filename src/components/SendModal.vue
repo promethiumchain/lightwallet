@@ -106,7 +106,7 @@ name: "SendModal",
                     alert("Transaction send with hash: "+transactionHash);
                 })
             })
-            .catch(err => console.log(err))
+            .catch(err => alert('error creating the tx : '+ err))
             this.isOpen = false
         }
     }
