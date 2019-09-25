@@ -4,7 +4,7 @@ import { app, protocol, BrowserWindow } from 'electron'
 import {
   createProtocol,
 } from 'vue-cli-plugin-electron-builder/lib'
-import path from 'path'
+
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -19,7 +19,6 @@ protocol.registerSchemesAsPrivileged([{scheme: 'app', privileges: { secure: true
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({ width: 1200, height: 500,
-    icon: path.join(__dirname + './assets/crystal6464.png'),
     resizable: false, webPreferences: {
     nodeIntegration: true
   } })
