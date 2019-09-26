@@ -89,7 +89,7 @@ export default {
 
 .address {
     display: block;
-    background: rgb(75, 75, 75);
+    background: rgb(0, 0, 0);
     color: rgb(0, 218, 247);
     padding: 2px;
     border-top: 1px rgb(0, 218, 247) solid;

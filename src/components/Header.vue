@@ -41,7 +41,7 @@ export default {
     border-bottom: 1px rgb(0, 218, 247) solid;
     position: relative;
     top: -10px;
-    background-color: rgb(75, 75,75);
+    background-color: rgb(0, 0, 0);
     display: block;
     color : rgb(0, 218, 247);
     text-align: center;

@@ -43,7 +43,7 @@ export default {
 <style scoped>
 .add {
     margin-top: -5px;
-    background: rgb(75, 75, 75);
+    background: rgb(0, 0, 0);
 }
 
 .btn {

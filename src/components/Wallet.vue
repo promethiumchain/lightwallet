@@ -21,7 +21,7 @@ components: {
 <style scoped>
 .wallet {
     margin-top: 10px;
-    background: rgb(75, 75, 75);
+    background: rgb(0, 0, 0);
     color: rgb(0, 218, 247);
 }
 </style>
