@@ -47,19 +47,19 @@ name: "SendModal",
             this.isOpen = !this.isOpen
         },
         sendcoins() {
-            
+            var w3 = new Web3(network.address)
             if (this.toAddr.length < 24) {
                 alert("address is not right")
                 return
             }
-            let amountNumber = Number(this.amount)
-            let multi = 1000000000000000000
-            let finalAmount = amountNumber * multi
+            
+            
+            let finalAmount = w3.utils.toWei(this.amount)
             if (this.amount > this.balance || this.balance == 0) { // TODO store current and check against it
                 alert("no enough funds available to make this transaction")
                 return
             }
-            var w3 = new Web3(network.address)
+            
             var customCommon = Common.forCustomChain(
             'mainnet',
             {
