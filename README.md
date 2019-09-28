@@ -6,6 +6,14 @@ git
 npm or yarn
 build-tools(for windows) => npm install --global windows-build-tools
 
+To Install :
+git clone this repo
+cd lightwallet
+npm i
+npm run electron:build
+
+Your executable is under dist_electron folder.
+
 
 ## Project setup
 ```
