@@ -2,10 +2,10 @@
   <div class="header">
     <h5>Promethium Light Wallet Version 0.0.1</h5>
     <div class="row">
-    <div class="hbn"> Current Block Number : {{ blockNumber }} </div>
-    <div class="hip"> Connected to node : {{ nodeAddr }}</div>
-  </div>
+        <div class="hbn"> Current Block Number : {{ blockNumber }} </div>
+        <div class="hip"> Connected to node : {{ nodeAddr }}</div>
     </div>
+  </div>
 </template>
 
 <script>

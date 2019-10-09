@@ -3,6 +3,7 @@
   <Header />
   <AddAddress v-on:add-address="addAddress"/>
   <Wallet v-bind:wallets="wallets" v-on:del-address="deleteAddress"/>
+  <Footer v-bind:wallets="wallets"/>
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 import Header from "./components/Header"
 import Wallet from "./components/Wallet"
 import AddAddress from "./components/AddAddress"
+import Footer from "./components/Footer"
 // Todo Add Secure LS
 
 
@@ -19,6 +21,7 @@ export default {
     Header,
     Wallet,
     AddAddress,
+    Footer
   },
   data () {
     return {
