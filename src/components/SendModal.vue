@@ -47,7 +47,7 @@ name: "SendModal",
             this.isOpen = !this.isOpen
         },
         sendcoins() {
-            var w3 = new Web3(network.address)
+            var w3 = new Web3(network.http)
             if (this.toAddr.length < 24) {
                 alert("address is not right")
                 return

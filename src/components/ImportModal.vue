@@ -75,7 +75,7 @@ export default {
             input.click()
         },
         importFromPrivateKey() {
-            var w3 = new Web3(network.address)
+            var w3 = new Web3(network.http)
             let ac = w3.eth.accounts.privateKeyToAccount(this.privatekey)
             const newAddress = {
                 id: uuid.v4(),

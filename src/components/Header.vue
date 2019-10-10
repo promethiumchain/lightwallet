@@ -31,7 +31,7 @@ export default {
                 this.blockNumber = res.number
             })
             
-        this.nodeAddr = network.address
+        this.nodeAddr = network.http
     }
 }
 </script>

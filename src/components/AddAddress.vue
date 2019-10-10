@@ -20,7 +20,7 @@ export default {
     },
     methods: {
         addAddress(e) {
-            var w3 = new Web3(network.address)
+            var w3 = new Web3(network.http)
             var ac = w3.eth.accounts.create()
             e.preventDefault();
             const newAddress = {
