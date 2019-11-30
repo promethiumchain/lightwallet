@@ -18,10 +18,19 @@ components: {
 }
 </script>
 
-<style scoped>
+<style >
 .wallet {
     margin-top: 10px;
     background: rgb(0, 0, 0);
     color: rgb(0, 218, 247);
+    -webkit-app-region: drag;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.btn {
+  -webkit-app-region: no-drag;
 }
 </style>

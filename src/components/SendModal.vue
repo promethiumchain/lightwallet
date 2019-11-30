@@ -52,8 +52,6 @@ name: "SendModal",
                 alert("address is not right")
                 return
             }
-            
-            
             let finalAmount = w3.utils.toWei(this.amount)
             if (this.amount > this.balance || this.balance == 0) { // TODO store current and check against it
                 alert("no enough funds available to make this transaction")

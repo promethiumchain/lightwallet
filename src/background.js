@@ -1,24 +1,25 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow, Tray, nativeImage, Menu } from 'electron'
 import {
   createProtocol,
 } from 'vue-cli-plugin-electron-builder/lib'
 
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
-
+const path = require('path')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
-
+let tray
+const image = nativeImage.createFromPath(path.join(__static, 'assets/crystal1024.png'))
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([{scheme: 'app', privileges: { secure: true, standard: true } }])
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({ width: 1200, height: 500,
+  win = new BrowserWindow({ width: 1200, height: 500, frame: false, title: 'Promethium Light Wallet', 
     resizable: false, webPreferences: {
     nodeIntegration: true
   } })
@@ -76,7 +77,13 @@ app.on('ready', async () => {
     // }
 
   }
+  createTray()
   createWindow()
+  if (process.platform === 'darwin') {
+    setDockIcon()
+  } else {
+    win.setIcon(path.join(__static, 'assets/crystal1024.png'))
+  }
 })
 
 // Exit cleanly on request from parent process in development mode.
@@ -91,5 +98,35 @@ if (isDevelopment) {
     process.on('SIGTERM', () => {
       app.quit()
     })
+  }
+}
+
+// let imgPath = process.env.DEV ? "assets/crystal32bw.png" : path.join(process.resourcesPath, "crystal32bw.png");
+const trayIcnName = process.platform === 'win32' ? 'crystal32bw.png' : 'crystal32bw.png';
+const trayIcnPath = process.env.WEBPACK_DEV_SERVER_URL
+    ? path.join(__static, `assets/${trayIcnName}`)
+    : path.join(__static, `assets/${trayIcnName}`);
+const createTray = () => {
+  tray = new Tray(trayIcnPath);
+  const contextMenu = Menu.buildFromTemplate([
+    { label: 'Promethium Light Wallet Menu', enabled: false },
+    { label: 'show wallet window', click: () => {
+      if (win === null) {
+        createWindow()
+      }
+      let b = win.isMinimized()
+      if (b === true) {
+        win.show()
+      }  
+    } },
+    { label: 'quit wallet', click: () => { app.quit() } },
+  ])
+  tray.setToolTip('iPromethium')
+  tray.setContextMenu(contextMenu)
+}
+
+const setDockIcon = () => {
+  if (process.platform === 'darwin') {
+    app.dock.setIcon(image)
   }
 }
