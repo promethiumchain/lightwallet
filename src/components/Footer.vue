@@ -87,6 +87,7 @@ export default {
     position: relative;
     margin-top: 10px;
     min-height: 120px;
+    -webkit-app-region: drag;
 }
 
 .btnsave, .btnsetup {

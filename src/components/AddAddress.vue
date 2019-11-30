@@ -44,6 +44,7 @@ export default {
 .add {
     margin-top: -5px;
     background: rgb(0, 0, 0);
+    -webkit-app-region: drag;
 }
 
 .btn {

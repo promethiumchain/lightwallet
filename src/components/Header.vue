@@ -47,6 +47,7 @@ export default {
     text-align: center;
     margin-top: -50px;
     height: 60px;
+    -webkit-app-region: drag;
 }
 
 .hbn {
